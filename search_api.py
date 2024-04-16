@@ -5,8 +5,8 @@ from qdrant_client import QdrantClient
 class NeuralSearcher:
     def __init__(self, collection_name):
         self.collection_name = collection_name
-        self.model = SentenceTransformer("all-MiniLM-L6-v2")
-        self.client = QdrantClient()
+        self.model = SentenceTransformer("all-MiniLM-L6-v2", device="mps")
+        self.client = QdrantClient("http://localhost:6333")
 
     def search(self, query: str):
         vector = self.model.encode(query).tolist()
